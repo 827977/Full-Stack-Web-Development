@@ -1,38 +1,76 @@
 <html>
     <head>
-        <title>Form Data on Table</title>
+        <title> Information </title>
+        <style>
+            table{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th,td{
+                border: 1px dotted red;
+                padding:15px;
+            }
+        </style>
     </head>
     <body>
-        <form method="post" action="index.php">
-            Name<input type="text" name="name" placeholder="enter your name"/><br>
-            E-mail<input type="email" name="mail" placeholder="enter your email"/><br>
-            Contact No.<input type="contact" name="contact" /><br>
-            City<Select name="city">
-                <option value="1"> Dehradun</option>
-                <option value="2"> Delhi</option>
-                <option value="3"> Chandigarh</option>
-                <option value="4"> Mumbai</option>
-                <option value="5"> Kolkata</option>
-                <option value="6"> Other</option>
-                </Select><br>
-            Course<input type="text" name="course"/><br>
-            Intrest<input type="radio"  name="I1"/>Sport
-		    <input type="radio"  name="I2"/>Program
-            <input type="radio" name="I3"/>Reading
-			<input type="radio" name="I4"/>Dance
-            <input type="radio" name="I5"/>Singing<br>
-            <input type="button" value="submit"/>
+        <form method="post" action="form.php">
+            Name <input type="text" name="name" placeholder = "Enter name" required/><br>
+            Email <input type="email" name="email" placeholder = "Enter email" required/><br>
+            Contact Number <input type="contact" name="contact" required /><br>
+            Select City <select name="city">
+                <option value="Delhi">Delhi</option>
+                <option value="Meerut">Meerut</option>
+                <option value="Kolkata">Kolkata</option>
+            </select><br>
+            Course <input type="text" name="Course" placeholder="Enter the course" required/><br>
+            Interests: <br>
+            Programming <input type="checkbox" name="int1" value="Programming"/>
+            Sports <input type="checkbox" name="int2" value="Sports"/>
+            Reading <input type="checkbox" name="int3" value="Reading"/>
+            Games <input type="checkbox" name="int4" value="Games"/>
+            <br><input type="submit" name="formSubmit" value="Click to Submit">
         </form>
-
-        <?php 
-            $nm= $_POST['name'];
-            $ml= $_POST['mail'];
-            $ct= $_POST['contact'];
-            $cty= $_POST['city'];
-            $crse= $_POST['course'];
-           
-
-            echo "$nm $ml";
-        ?>
+        
     </body>
+<?php
+    if($_POST['formSubmit']== "Click to Submit")
+    {
+        if(empty($_POST['int1'])||empty($_POST['int2'])||empty($_POST['int3'])||empty($_POST['int4']))
+            echo "--";
+        $varname=$_POST['name'];
+        $varemail=$_POST['email'];
+        $varcontact_no=$_POST['contact'];
+        $varcity=$_POST['city'];
+        $varcourse=$_POST['Course'];
+        $varint1=$_POST['int1'];
+        $varint2=$_POST['int2'];
+        $varint3=$_POST['int3'];
+        $varint4=$_POST['int4'];
+        
+        $errorMessage = "";
+    }
+?>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>City</th>
+        <th>Course</th>
+        <th  colspan="4">Interest</th>
+    </tr>
+    <tr>
+        <td><?php echo "$varname"; ?></td>
+        <td><?php echo "$varemail"; ?></td>
+        <td><?php echo "$varcontact_no"; ?></td>
+        <td><?php echo "$varcity"; ?></td>
+        <td><?php echo "$varcourse"; ?></td>
+       <?php if(empty($_POST['int1'])||empty($_POST['int2'])||empty($_POST['int3'])||empty($_POST['int4']))
+            echo "--"; ?>
+        <td><?php echo "$varint1" ; ?></td>
+        <td><?php echo "$varint2"; ?></td>
+        <td><?php echo "$varint3"; ?></td>
+        <td><?php echo "$varint4"; ?></td>
+    </tr>
+</table>
 </html>
